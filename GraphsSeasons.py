@@ -21,14 +21,14 @@ Z = Simple Rating System (SRS)
 
 df = pd.read_csv('nba_team_data.csv')
 
-newdf = 0
 cont = 0
 
 listPointsGame = []
 listSRS = []
 listGamesBehind = []
-listPointsAgainst = []
-newdf = pd.DataFrame()
+
+#completeStats = 
+yearStats = pd.DataFrame(columns=['SRS', 'GamesBehind', 'PointsGame', 'year'])
 
 for year in X:
 
@@ -51,27 +51,27 @@ for year in X:
     meanPointsGame = sum(pointsGame) / len(pointsGame)
     meanSRS = sum(simpleRatSys) / len(simpleRatSys)
 
-
-    print("MEDIA: " + str(meanGamesBehind))
-
     contIndex = 0
 
-    data = {'SRS': meanSRS, 'GB': meanGamesBehind, 'PS/G': meanPointsGame}
-    newdf = pd.DataFrame(data, index = [contIndex])
+    data = {'SRS': meanSRS, 'GamesBehind': meanGamesBehind, 'PointsGame': meanPointsGame, 'year': year}
+
+    #yearStats.loc[year] = data
+    yearStats = pd.DataFrame(data, index = [contIndex])
 
     contIndex = contIndex + 1
 
-    simpleRatSys = newdf['SRS'].tolist()
+    simpleRatSys = yearStats['SRS'].tolist()
     listSRS.append(simpleRatSys[0])
 
-    gamesBehind = newdf['GB'].tolist()
+    gamesBehind = yearStats['GamesBehind'].tolist()
     listGamesBehind.append(gamesBehind[0])
 
-    pointsGame = newdf['PS/G'].tolist()
+    pointsGame = yearStats['PointsGame'].tolist()
     listPointsGame.append(pointsGame[0])
 
 
-print(newdf)
+print("Hola")
+print(yearStats)
 print(listGamesBehind)
 print(listSRS)
 print(listPointsGame)
@@ -82,6 +82,8 @@ df = pd.DataFrame(diction)
 
 print(df.corr())
 
+
+## ALL SEASONS CORRELATION GRAPH
 well_data = df.corr()
 
 sns.heatmap(well_data, cmap="RdBu", vmax= 1, vmin= -1, annot=True,
@@ -89,4 +91,5 @@ sns.heatmap(well_data, cmap="RdBu", vmax= 1, vmin= -1, annot=True,
 
 plt.show()
 
-# YA ESTÁ HECHA CORRELACIÓN ENTRE TODAS LAS TEMPORADAS, AHORA LA HACEMOS UNA A UNA
+# MATRIX OF GRAPHS
+
